@@ -1,52 +1,186 @@
 package calculadorametodos;
 
 import javax.swing.JOptionPane;
-/*
-        ninguno de los metodos usa parametros ya que es mas facil llamar
-        a los metodos y reiniciar los valores
-        */
+
 public class CalculadoraConMetodos {
 
     public static void main(String[] args) {
-/*  
-        No incluye ninguna variable
-        llama a la variable seleccion
-        */    
+        Seleccion();
     }
 
     public static void Seleccion() {
-/*  
-        llama al metodo Menu dentro de un switch case para llamar a los
-        diferentes metodos de ejercicio (suma. resta, multiplicacion, etc)
-        */
+        switch (Menu()) {
+            case 1:
+                Suma();
+                break;
+            case 2:
+                Resta();
+                break;
+            case 3:
+                Multiplicacion();
+                break;
+            case 4:
+                Divicion();
+                break;
+            case 5:
+                Mayor();
+                break;
+            case 6:
+                Potencia();
+                break;
+            case 7:
+                Salir();
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "ingrese solo opciones validas");
+                Seleccion();
+                break;
+        }
     }
 
-    public static void Menu() {
-/*  
-        se usara una variable de tipo int
-        se usa una entrada de un numero entero del cual dependera que ejercicio
-        va a realizar
-        */
+    public static int Menu() {
+        int Eleccion = 0;
+        Boolean Cierre = true;
+        do {
+            try {
+                Eleccion = Integer.parseInt(JOptionPane.showInputDialog("Calculadora :D"
+                        + "\nIngrese una de las opciones" + "\n 1- Sumar" + "\n 2- Restar" + "\n 3- Multiplicacion"
+                        + "\n 4- Divicion" + "\n 5- Comparar 2 numeros" + "\n 6 Potencia" + "\n 7- Salir"));
+                Cierre = false;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Ingrese solo numeros");
+            }
+        } while (Cierre == true);
+        return Eleccion;
     }
 
-    public static void Entradas() {
-/*
-        se usara una variable de tipo double para ser retornada como el valor
-        del numero que el usuario necesita 
-        */
+    public static double Num1() {
+        Boolean Cierre = true;
+        double Eleccion = 0;
+        do {
+            try {
+                Eleccion = Double
+                        .parseDouble(JOptionPane.showInputDialog("Calculadora :D" + "\n Ingrese el primer numero "));
+                Cierre = false;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Ingrese solo numeros");
+            }
+        } while (Cierre == true);
+        return Eleccion;
     }
 
-    public static void Ejercicios() {
-/*
-        En cada metodo de ejercicio se pediran 2 numeros dependiendo de
-        lo que selecciono el usuario
-        */    
+    public static double Num2() {
+        Boolean Cierre = true;
+        double Eleccion = 0;
+        do {
+            try {
+                Eleccion = Double
+                        .parseDouble(JOptionPane.showInputDialog("Calculadora :D" + "\n Ingrese el segundo numero "));
+                Cierre = false;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Ingrese solo numeros");
+            }
+        } while (Cierre == true);
+        return Eleccion;
+    }
+
+    public static double NumDivicion() {
+        Boolean Cierre = true;
+        double Eleccion = 0;
+        do {
+            try {
+                Eleccion = Double
+                        .parseDouble(JOptionPane.showInputDialog("Calculadora :D" + "\n Ingrese el segundo numero "));
+                Cierre = false;
+                if (Eleccion == 0) {
+                    JOptionPane.showMessageDialog(null, "El numero deve ser distinto de 0");
+                    Cierre = true;
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Ingrese solo numeros");
+            }
+        } while (Cierre == true);
+        return Eleccion;
+    }
+
+    public static double MenuSalir() {
+        Boolean Cierre = true;
+        double Eleccion = 0;
+        do {
+            try {
+                Eleccion = Double.parseDouble(JOptionPane.showInputDialog("Calculadora :D"
+                        + "\n Esta seguro de que quiere" + "\n salir de la calculadora" + "\n 1- Si" + "\n 2- No"));
+                if (Eleccion == 1 || Eleccion == 2) {
+                    Cierre = false;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ingrese solo las opciones validas");
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Ingrese solo numeros");
+            }
+        } while (Cierre == true);
+        return Eleccion;
+    }
+
+    public static void Suma() {
+        double Resultado = Num1() + Num2();
+        JOptionPane.showMessageDialog(null, "El resultado es :" + Resultado);
+        Seleccion();
+    }
+
+    public static void Resta() {
+        double Resultado = Num1() - Num2();
+        JOptionPane.showMessageDialog(null, "El resultado es :" + Resultado);
+        Seleccion();
+    }
+
+    public static void Multiplicacion() {
+        double Resultado = Num1() * Num2();
+        JOptionPane.showMessageDialog(null, "El resultado es :" + Resultado);
+        Seleccion();
+    }
+
+    public static void Divicion() {
+
+        double Resultado = Num1() / NumDivicion();
+        JOptionPane.showMessageDialog(null, "El resultado es :" + Resultado);
+        Seleccion();
+    }
+
+    public static void Mayor() {
+        double Num1 = Num1();
+        double Num2 = Num2();
+        if (Num1 > Num2) {
+            JOptionPane.showMessageDialog(null,
+                    " El primer numero es mayor" + "\n ya que " + Num1 + " es mayor que " + Num2);
+            Seleccion();
+        } else if (Num1 < Num2) {
+            JOptionPane.showMessageDialog(null,
+                    " El segundo numero es mayor" + "\n ya que " + Num1 + " es menor que " + Num2);
+            Seleccion();
+        } else if (Num1 == Num2) {
+            JOptionPane.showMessageDialog(null, "Ambos numeros son iguales");
+            Seleccion();
+        }
+    }
+
+    public static void Potencia() {
+        Double Resultado = (Double) Math.pow(Num1(), Num2());
+        JOptionPane.showMessageDialog(null, "El resultado es :" + Resultado);
+        Seleccion();
     }
 
     public static void Salir() {
-/*
-        El metodo final del recorrido donde se le preguntara el usuario 
-        si realmente quiere salir del programa
-        */
+        switch ((int) MenuSalir()) {
+            case 1:
+                JOptionPane.showMessageDialog(null, " gracias por usar mi calculadora"
+                        + "\n si quiere mas opciones en la calculadora" + "\n por favor done :D");
+                System.exit(0);
+                break;
+            default:
+                Seleccion();
+                break;
+        }
     }
 }
